@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Mesa de DJ · The Reveal</title>
+<meta name="description" content="Mesa de DJ (3 × 6 m) · Revolut F1 Team The Reveal · opções de lockup e planificação">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+</head>
+<body>
+<style>
+/* Layout: cabeçalho em escala outdoor, palco 3D escuro em card de 20px, controles em pílulas, planificação e grade de opções abaixo.
+   Revolut site DS: near-black + branco, pílulas 9999px, zero sombras, display 500 com tracking negativo, Inter com tracking positivo. */
+:root{
+  --bg:#ffffff; --surface:#f4f4f4; --fg:#191c1f; --mut:#505a63; --faint:#8d969e; --line:#c9c9cd;
+  --stage:#191c1f; --stage-fg:#f4f4f4; --stage-mut:#8d969e;
+  --pill-bg:#f4f4f4; --pill-fg:#000000; --pill-on-bg:#191c1f; --pill-on-fg:#ffffff;
+  --accent:#494fdf;
+  --display:'Inter Tight','Aeonik Pro','Helvetica Neue',Arial,sans-serif;
+  --body:'Inter','Helvetica Neue',Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1013; --surface:#191c1f; --fg:#f4f4f4; --mut:#c9c9cd; --faint:#8d969e; --line:#33383d;
+  --stage:#000000; --stage-fg:#f4f4f4; --stage-mut:#8d969e;
+  --pill-bg:#24282c; --pill-fg:#f4f4f4; --pill-on-bg:#f4f4f4; --pill-on-fg:#191c1f; --accent:#7b80ff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1013; --surface:#191c1f; --fg:#f4f4f4; --mut:#c9c9cd; --faint:#8d969e; --line:#33383d;
+  --stage:#000000; --stage-fg:#f4f4f4; --stage-mut:#8d969e;
+  --pill-bg:#24282c; --pill-fg:#f4f4f4; --pill-on-bg:#f4f4f4; --pill-on-fg:#191c1f; --accent:#7b80ff; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;letter-spacing:.24px}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 80px;display:grid;gap:48px}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;text-wrap:balance}
+h1{font-size:clamp(48px,9vw,112px);line-height:1;letter-spacing:-.02em}
+h2{font-size:clamp(30px,4vw,48px);line-height:1.15;letter-spacing:-.01em}
+h3{font-size:24px;line-height:1.25;letter-spacing:-.005em}
+p{margin:0}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.16px;color:var(--mut)}
+.lead{font-size:18px;line-height:1.56;letter-spacing:-.09px;color:var(--mut);max-width:62ch}
+header{display:grid;gap:20px}
+.specs{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);border-radius:9999px;padding:6px 14px;font-size:14px;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
+
+/* pílulas */
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{appearance:none;border:0;cursor:pointer;border-radius:9999px;padding:12px 24px;font:500 16px/1.2 var(--display);background:var(--pill-bg);color:var(--pill-fg);transition:opacity .15s}
+.pill:hover{opacity:.85}
+.pill[aria-pressed="true"]{background:var(--pill-on-bg);color:var(--pill-on-fg)}
+.pill:focus-visible,.thumb:focus-visible,input:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+.pill.sm{padding:9px 18px;font-size:14px}
+.stage .pill{background:rgba(244,244,244,.1);color:var(--stage-fg)}
+.stage .pill[aria-pressed="true"]{background:#f4f4f4;color:#191c1f}
+
+.picker{display:grid;gap:14px}
+.picker-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.picker-label{font-size:14px;font-weight:600;color:var(--mut);min-width:110px}
+
+/* palco */
+.viewer{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px}
+.stage{background:var(--stage);color:var(--stage-fg);border-radius:20px;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;min-height:560px}
+.stage-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px 0;flex-wrap:wrap}
+.stage-title{font:500 20px/1.3 var(--display);letter-spacing:-.005em}
+.stage-hint{font-size:13px;color:var(--stage-mut)}
+.scene{background:#191c1f;position:relative;cursor:grab;touch-action:none;user-select:none;overflow:hidden;min-height:420px}
+.scene:active{cursor:grabbing}
+.stage-bottom{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;padding:0 20px 20px}
+.ctl{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ctl label{font-size:13px;color:var(--stage-mut)}
+.ctl output{font-variant-numeric:tabular-nums;font-size:14px;min-width:64px}
+input[type=range]{accent-color:#f4f4f4;width:180px}
+.toggles{display:flex;gap:6px;flex-wrap:wrap}
+
+/* painel de info */
+.info{background:var(--surface);border-radius:20px;padding:24px;display:grid;gap:18px;align-content:start}
+.tag{display:inline-block;font-size:13px;font-weight:600;padding:4px 12px;border-radius:9999px;background:var(--pill-on-bg);color:var(--pill-on-fg);width:max-content}
+.info ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--mut);font-size:15px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.kv dt{color:var(--faint)}
+.kv dd{margin:0;font-variant-numeric:tabular-nums}
+.layers-legend{display:grid;gap:8px;font-size:14px}
+.layers-legend div{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:baseline}
+.layers-legend b{font-weight:600}
+
+/* planificação */
+.sec{display:grid;gap:24px}
+.sec-head{display:grid;gap:10px}
+.unfold{overflow-x:auto;background:var(--stage);border-radius:20px;padding:28px 20px 20px}
+.unfold-inner{display:grid;grid-template-columns:1fr 2fr 1fr;gap:6px;min-width:640px}
+.unfold figure{margin:0;display:grid;gap:8px}
+.unfold img{width:100%;display:block;aspect-ratio:var(--ar);background:#000}
+.unfold figcaption{font-size:13px;color:var(--stage-mut);display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+
+/* grade */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.thumb{appearance:none;border:0;text-align:left;padding:0;cursor:pointer;background:var(--surface);border-radius:20px;overflow:hidden;display:grid;color:var(--fg);font:inherit}
+.thumb img{width:100%;aspect-ratio:5/3;object-fit:cover;display:block;background:#000}
+.thumb .t-body{padding:14px 18px 18px;display:grid;gap:4px}
+.thumb .t-code{font-size:13px;font-weight:600;color:var(--mut)}
+.thumb .t-name{font:500 20px/1.3 var(--display)}
+.thumb[aria-current="true"]{outline:2px solid var(--fg);outline-offset:-2px}
+
+/* estrutura */
+.struct{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
+.card{background:var(--surface);border-radius:20px;padding:24px}
+.card svg{width:100%;height:auto;display:block}
+.card svg text{font-family:var(--body);fill:var(--mut)}
+.notes{display:grid;gap:14px;font-size:15px;color:var(--mut)}
+.notes strong{color:var(--fg);font-weight:600}
+
+@media (max-width:980px){.viewer,.struct{grid-template-columns:1fr}}
+@media (max-width:560px){.stage{min-height:480px}.scene{min-height:340px}.picker-label{min-width:0;width:100%}input[type=range]{width:140px}}
+@media (prefers-reduced-motion:reduce){</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">The Reveal · Audi Revolut F1 Team · São Paulo</span>
+    <h1>Mesa de DJ</h1>
+    <p class="lead">Lockup de marcas na frente da mesa, em duas linhas: minimalista e degradês em camadas, derivada do backdrop clear imersivo V2. Gire a mesa, troque a opção e separe as camadas.</p>
+    <div class="specs">
+      <span class="chip">2,0 × 1,0 × 1,2 m</span>
+      <span class="chip">Frente 2000 × 1200 mm</span>
+      <span class="chip">Laterais 1000 × 1200 mm</span>
+      <span class="chip">7 opções</span>
+    </div>
+  </header>
+
+  <section class="picker" aria-label="Escolha a opção">
+    <div class="picker-row">
+      <span class="picker-label">Versão</span>
+      <div class="pills" id="lines"></div>
+    </div>
+    <div class="picker-row">
+      <span class="picker-label">Opção</span>
+      <div class="pills" id="opts"></div>
+    </div>
+  </section>
+
+  <section class="viewer">
+    <div class="stage">
+      <div class="stage-top">
+        <span class="stage-title" id="stageTitle">M1 · Preto absoluto</span>
+        <span class="stage-hint">Arraste para girar</span>
+      </div>
+      <div class="scene" id="scene" aria-label="Vista 3D da mesa de DJ">
+        
+      </div>
+      <div class="stage-bottom">
+        <div class="pills" id="views"></div>
+        <div class="ctl" id="gapCtl">
+          <label for="gap">Afastamento entre camadas</label>
+          <input type="range" id="gap" min="0" max="300" step="10" value="50">
+          <output id="gapOut" for="gap">50 mm</output>
+        </div>
+        <div class="toggles" id="layerToggles"></div>
+      </div>
+    </div>
+
+    <aside class="info" id="info"></aside>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="eyebrow">Planificação</span>
+      <h2 id="unfoldTitle">Lateral, frente e lateral</h2>
+      <p class="lead">A arte envolve a mesa sem emenda: a borda direita da lateral esquerda continua na frente, e a frente continua na lateral direita.</p>
+    </div>
+    <div class="unfold">
+      <div class="unfold-inner">
+        <figure><img id="uL" alt="Lateral esquerda" style="--ar:1000/1200"><figcaption><span>Lateral esquerda</span><span>1000 × 1200</span></figcaption></figure>
+        <figure><img id="uF" alt="Frente" style="--ar:2000/1200"><figcaption><span>Frente · lockup</span><span>2000 × 1200</span></figcaption></figure>
+        <figure><img id="uR" alt="Lateral direita" style="--ar:1000/1200"><figcaption><span>Lateral direita</span><span>1000 × 1200</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="eyebrow">Todas as opções</span>
+      <h2>2 minimalistas, 5 em camadas</h2>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="eyebrow">Estrutura e posição do lockup</span>
+      <h2>Como a mesa foi lida</h2>
+    </div>
+    <div class="struct">
+      <div class="card">
+        <svg viewBox="0 0 760 520" role="img" aria-label="Elevação frontal com cotas e posição das marcas">
+          <rect x="80" y="40" width="600" height="360" fill="#060706" stroke="currentColor" stroke-opacity=".25"/>
+          <line x1="80" y1="100" x2="680" y2="100" stroke="#DCD1B1" stroke-dasharray="6 6" stroke-width="1.5"/>
+          <rect x="266" y="130.6" width="228" height="130.8" fill="none" stroke="#494fdf" stroke-width="2"/>
+          <text x="380" y="122" text-anchor="middle" font-size="13">bloco de marcas 760 × 436 mm</text>
+          <text x="380" y="190" text-anchor="middle" font-size="22" style="fill:#fff;font-family:var(--display);font-weight:500">Revolut</text>
+          <text x="380" y="232" text-anchor="middle" font-size="12" style="fill:#c9c9cd">Audi · Revolut · F1 Team  |  Adidas</text>
+          <text x="690" y="74" font-size="13">faixa 200</text>
+          <text x="690" y="254" font-size="13">corpo 1000</text>
+          <line x1="60" y1="40" x2="60" y2="400" stroke="currentColor" stroke-opacity=".4"/>
+          <text x="52" y="224" text-anchor="end" font-size="13">1200</text>
+          <line x1="80" y1="430" x2="680" y2="430" stroke="currentColor" stroke-opacity=".4"/>
+          <text x="380" y="452" text-anchor="middle" font-size="13">2000 mm</text>
+          <text x="266" y="290" font-size="12">topo das marcas a 302 mm da borda superior</text>
+          <text x="80" y="492" font-size="12">Tampo de trabalho do DJ a 1000 mm do piso, atrás da faixa superior.</text>
+        </svg>
+      </div>
+      <div class="card notes">
+        <p><strong>Leitura das imagens.</strong> Caixa de 2,0 m de frente, 1,0 m de profundidade e 1,2 m de altura, aberta do lado do DJ. A linha a 1,0 m é o tampo; os 200 mm acima formam a faixa superior que esconde o equipamento.</p>
+        <p><strong>Hierarquia.</strong> Revolut principal em letra caixa retroiluminada de 20 mm. Abaixo, Audi + Revolut + F1 Team com Adidas à direita. Mesmos arquivos e proporções do backdrop, na escala 0,4.</p>
+        <p><strong>Posição.</strong> O bloco começa logo abaixo da faixa de 200 mm e fica centralizado. Os 460 mm de baixo ficam livres para o degradê respirar.</p>
+        <p><strong>Camadas.</strong> A frente da caixa é a C3 preta. C2 e C1 são placas clear à frente dela; a sugestão é testar 50 mm entre placas (100 mm de saliência total). As laterais recebem a mesma arte em adesivo direto, sem placas.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const IMG='img/';
+const OPTIONS=[
+  {id:'M1',line:'min',code:'M1',name:'Preto absoluto',
+   desc:'Caixa preta fosca. Só as marcas, em branco, e um fio cream que marca a faixa superior de 200 mm.',
+   bullets:['Letra caixa Revolut retroiluminada, halo branco suave.','Lockup secundário impresso em branco.','Fio cream de 6 mm contorna as três faces na altura do tampo.'],
+   prod:'Caixa em MDF preto fosco ou adesivo preto. Fio em adesivo cream ou fita LED 2700 K embutida.'},
+  {id:'M2',line:'min',code:'M2',name:'Fio âmbar',
+   desc:'Caixa preta com um fio âmbar contínuo na base e brilho subindo, como o sol baixo do amanhecer.',
+   bullets:['Fio âmbar a 140 mm do piso, nas três faces.','Brilho em degradê âmbar até cerca de 440 mm de altura.','Reflexo suave abaixo do fio, para colar a mesa no chão.'],
+   prod:'Fio em fita LED âmbar com difusor, ou impressão. Brilho impresso com branco seletivo.'},
+  {id:'LA',line:'cam',code:'A',name:'Portal paulista',
+   desc:'Anéis da calçada paulista abrindo em túnel atrás das marcas.',
+   c2:'Sete anéis largos em âmbar e cream, cada vez mais espaçados.',c1:'Filetes finos em mint e cream entre os anéis.',
+   bullets:['Núcleo preto guarda as marcas.','Os anéis continuam pelas laterais.'],prod:''},
+  {id:'LB',line:'cam',code:'B',name:'Aurora',
+   desc:'Véus de luz âmbar cruzados por véus finos teal e cream em contrafase.',
+   c2:'Três véus largos âmbar e laranja, bordas difusas.',c1:'Véus finos teal e cream, deslocados.',
+   bullets:['Ao andar em volta, os véus deslizam um sobre o outro.','Desfoque vetorial: rasterizar na arte-final.'],prod:''},
+  {id:'LC',line:'cam',code:'C',name:'Horizonte',
+   desc:'Sol âmbar nascendo do chão atrás de linhas horizontais em perspectiva.',
+   c2:'Sol âmbar na base e céu teal no topo.',c1:'Linhas horizontais, grossas embaixo e finas em cima.',
+   bullets:['Lê como horizonte infinito atrás do DJ.','As linhas fecham na altura do tampo.'],prod:''},
+  {id:'LD',line:'cam',code:'D',name:'Campo de ondas',
+   desc:'O padrão da calçada dividido entre as camadas: ondas âmbar atrás, ondas teal na frente.',
+   c2:'Ondas âmbar e laranja.',c1:'Ondas teal encaixadas nas da C2.',
+   bullets:['De frente o padrão se completa.','Em ângulo as ondas se descolam (paralaxe).'],prod:''},
+  {id:'LE',line:'cam',code:'E',name:'Velocidade',
+   desc:'Feixes radiais saindo de trás do Revolut, como túnel de aceleração.',
+   c2:'Feixes largos âmbar e laranja.',c1:'Feixes finos cream e mint, em outro ângulo.',
+   bullets:['Todos partem do centro da letra caixa.','Continua nas laterais como rastro.'],prod:''}
+];
+const LINES=[{id:'min',name:'Minimalista'},{id:'cam',name:'Degradês em camadas'}];
+const VIEWS=[{id:'34',name:'3/4',az:-38,el:14},{id:'front',name:'Frente',az:0,el:6},{id:'side',name:'Lateral',az:-80,el:8},{id:'top',name:'Do alto',az:-26,el:42}];
+const DIM={W:2000,D:1000,H:1200};
+const st={opt:'LA',view:'34',gap:50,show:{C2:true,C1:true}};
+try{const s=JSON.parse(localStorage.getItem('mesa-dj')||'{}');if(s.opt&&OPTIONS.find(o=>o.id===s.opt))st.opt=s.opt;}catch(e){}
+const $=id=>document.getElementById(id);
+const sceneEl=$('scene');
+
+function el(tag,cls,parent){const e=document.createElement(tag);if(cls)e.className=cls;if(parent)parent.appendChild(e);return e}
+function save(){try{localStorage.setItem('mesa-dj',JSON.stringify({opt:st.opt}))}catch(e){}}
+
+// pílulas
+function pillBtn(parent,label,pressed,on,sm){const b=el('button','pill'+(sm?' sm':''),parent);b.type='button';b.textContent=label;b.setAttribute('aria-pressed',pressed);b.onclick=on;return b}
+function renderPickers(){
+  const o=cur();
+  $('lines').innerHTML='';LINES.forEach(l=>pillBtn($('lines'),l.name,o.line===l.id,()=>{if(o.line!==l.id){select(OPTIONS.find(x=>x.line===l.id).id)}}));
+  $('opts').innerHTML='';OPTIONS.filter(x=>x.line===o.line).forEach(x=>pillBtn($('opts'),x.code+' · '+x.name,x.id===o.id,()=>select(x.id)));
+  $('views').innerHTML='';VIEWS.forEach(v=>pillBtn($('views'),v.name,st.view===v.id,()=>{goView(v.id)},true));
+  const lt=$('layerToggles');lt.innerHTML='';
+  if(o.line==='cam'){[['C2','Mostrar C2'],['C1','Mostrar C1 + marcas']].forEach(([k,n])=>pillBtn(lt,n,st.show[k],()=>{st.show[k]=!st.show[k];applyLayers();renderPickers()},true))}
+  $('gapCtl').hidden=o.line!=='cam';
+}
+const cur=()=>OPTIONS.find(o=>o.id===st.opt);
+
+// 3D · WebGL (three r128)
+const T=THREE, TARGET=new T.Vector3(0,560,0), RADIUS=5000;
+const renderer=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+renderer.outputEncoding=T.sRGBEncoding;
+renderer.setClearColor(0x191c1f,1);
+renderer.domElement.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block';
+sceneEl.appendChild(renderer.domElement);
+const scene=new T.Scene();
+const camera=new T.PerspectiveCamera(30,1,50,40000);
+const controls=new T.OrbitControls(camera,renderer.domElement);
+controls.target.copy(TARGET);controls.enableDamping=true;controls.dampingFactor=.08;controls.enablePan=false;
+controls.minDistance=3200;controls.maxDistance=11000;controls.minPolarAngle=.35;controls.maxPolarAngle=Math.PI/2-.02;
+controls.addEventListener('start',()=>{if(st.view){st.view=null;renderPickers()}});
+const loader=new T.TextureLoader(), texCache={};
+function tex(name){if(!texCache[name]){const t=loader.load(IMG+name+'.webp',()=>dirty=true);t.encoding=T.sRGBEncoding;t.anisotropy=renderer.capabilities.getMaxAnisotropy();texCache[name]=t}return texCache[name]}
+// chão: brilho radial
+const fc=document.createElement('canvas');fc.width=fc.height=256;{const g=fc.getContext('2d'),r=g.createRadialGradient(128,128,0,128,128,128);r.addColorStop(0,'rgba(80,92,87,.42)');r.addColorStop(.45,'rgba(45,52,49,.18)');r.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=r;g.fillRect(0,0,256,256)}
+const floor=new T.Mesh(new T.PlaneGeometry(7000,4600),new T.MeshBasicMaterial({map:new T.CanvasTexture(fc),transparent:true,depthWrite:false}));
+floor.rotation.x=-Math.PI/2;floor.position.y=-1;scene.add(floor);
+// caixa: ordem px, nx, py, ny, pz, nz
+const dark=c=>new T.MeshBasicMaterial({color:c});
+const mats=[new T.MeshBasicMaterial(),new T.MeshBasicMaterial(),dark(0x101211),dark(0x050505),new T.MeshBasicMaterial(),dark(0x0b0c0b)];
+const box=new T.Mesh(new T.BoxGeometry(DIM.W,DIM.H,DIM.D),mats);box.position.y=DIM.H/2;scene.add(box);
+box.add(new T.LineSegments(new T.EdgesGeometry(box.geometry),new T.LineBasicMaterial({color:0x2a302d})));
+// tampo do DJ (recuado) visível de cima
+const tampo=new T.Mesh(new T.PlaneGeometry(DIM.W-120,DIM.D-120),dark(0x070807));tampo.rotation.x=-Math.PI/2;tampo.position.y=DIM.H/2+1;box.add(tampo);
+// placas clear
+const planes={};
+['C2','C1'].forEach(k=>{
+  const m=new T.Mesh(new T.PlaneGeometry(DIM.W,DIM.H),new T.MeshBasicMaterial({transparent:true,depthWrite:false,side:T.DoubleSide}));
+  m.add(new T.LineSegments(new T.EdgesGeometry(m.geometry),new T.LineBasicMaterial({color:0xcfe3dd,transparent:true,opacity:.35})));
+  const glass=new T.Mesh(m.geometry,new T.MeshBasicMaterial({color:0xcfe3dd,transparent:true,opacity:.015,depthWrite:false,side:T.DoubleSide}));m.add(glass);
+  m.position.y=DIM.H/2;m.renderOrder=k==='C2'?1:2;scene.add(m);planes[k]={mesh:m,z:DIM.D/2};
+});
+let dirty=true,gapNow=st.gap;
+function applyOption(){
+  const o=cur(),cam=o.line==='cam';
+  mats[0].map=tex(o.id+'_right');mats[1].map=tex(o.id+'_left');
+  if(cam){mats[4].map=null;mats[4].color.set(0x050605)}else{mats[4].map=tex(o.id+'_front');mats[4].color.set(0xffffff)}
+  mats.forEach(m=>m.needsUpdate=true);
+  ['C2','C1'].forEach(k=>{planes[k].mesh.material.map=tex(o.id+'_'+k);planes[k].mesh.material.needsUpdate=true});
+  applyLayers();
+}
+function applyLayers(){const cam=cur().line==='cam';['C2','C1'].forEach(k=>planes[k].mesh.visible=cam&&st.show[k]);dirty=true}
+function placePlanes(){['C2','C1'].forEach((k,i)=>planes[k].mesh.position.z=DIM.D/2+(i+1)*Math.max(gapNow,2))}
+function camFrom(az,elv){const a=az*Math.PI/180,e=elv*Math.PI/180;return new T.Vector3(TARGET.x+RADIUS*Math.cos(e)*Math.sin(a)*-1,TARGET.y+RADIUS*Math.sin(e),TARGET.z+RADIUS*Math.cos(e)*Math.cos(a))}
+let tween=null;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function goView(id,instant){const v=VIEWS.find(x=>x.id===id);st.view=id;const to=camFrom(v.az,v.el);
+  if(instant||reduce){camera.position.copy(to);controls.update();dirty=true}else tween={from:camera.position.clone(),to,t:0};renderPickers()}
+function resize(){const w=sceneEl.clientWidth,h=sceneEl.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;
+  camera.fov=w/h<1.1?42:30;camera.updateProjectionMatrix();dirty=true}
+function loop(){
+  requestAnimationFrame(loop);
+  if(tween){tween.t=Math.min(1,tween.t+.06);const k=1-Math.pow(1-tween.t,3);camera.position.lerpVectors(tween.from,tween.to,k);if(tween.t>=1)tween=null;dirty=true}
+  if(Math.abs(gapNow-st.gap)>.5){gapNow+=(st.gap-gapNow)*(reduce?1:.18);placePlanes();dirty=true}
+  if(controls.update())dirty=true;
+  if(dirty){renderer.render(scene,camera);dirty=false}
+}
+controls.addEventListener('change',()=>dirty=true);
+$('gap').addEventListener('input',e=>{st.gap=+e.target.value;$('gapOut').textContent=st.gap+' mm'+(st.gap>150?' · exagerado':'')});
+
+// info
+function renderInfo(){
+  const o=cur(),cam=o.line==='cam';
+  $('stageTitle').textContent=o.code+' · '+o.name;
+  const lay=cam?`<div class="layers-legend">
+      <div><b>C1</b><span>${o.c1} Recebe a letra caixa e o lockup em branco.</span></div>
+      <div><b>C2</b><span>${o.c2}</span></div>
+      <div><b>C3</b><span>Frente preta da própria caixa.</span></div></div>`:'';
+  $('info').innerHTML=`<span class="tag">${cam?'Degradês em camadas':'Minimalista'}</span>
+    <div style="display:grid;gap:8px"><h3>${o.code} · ${o.name}</h3><p style="color:var(--mut)">${o.desc}</p></div>
+    ${lay}
+    <ul>${o.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+    <dl class="kv">
+      <dt>Frente</dt><dd>${cam?'C3 preta + C2 e C1 clear':'Adesivo ou pintura preta fosca'}</dd>
+      <dt>Laterais</dt><dd>${cam?'Mesma arte, adesivo direto':'Preto, mesma linguagem'}</dd>
+      <dt>Marcas</dt><dd>Letra caixa 20 mm + lockup impresso</dd>
+      ${cam?`<dt>Teste</dt><dd>50 mm entre placas, branco seletivo</dd>`:`<dt>Produção</dt><dd>${o.prod}</dd>`}
+    </dl>`;
+  $('unfoldTitle').textContent=o.code+' · '+o.name+' planificada';
+  $('uL').src=IMG+o.id+'_left.webp';$('uF').src=IMG+o.id+'_front.webp';$('uR').src=IMG+o.id+'_right.webp';
+  document.querySelectorAll('.thumb').forEach(t=>t.setAttribute('aria-current',t.dataset.id===o.id));
+}
+function renderGrid(){
+  const g=$('grid');OPTIONS.forEach(o=>{const b=el('button','thumb',g);b.type='button';b.dataset.id=o.id;
+    b.innerHTML=`<img src="${IMG}${o.id}_front.webp" alt="" loading="lazy"><span class="t-body"><span class="t-code">${o.line==='cam'?'Camadas':'Minimalista'} · ${o.code}</span><span class="t-name">${o.name}</span></span>`;
+    b.onclick=()=>{select(o.id);document.querySelector('.picker').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}})
+}
+function select(id){st.opt=id;save();applyOption();renderPickers();renderInfo()}
+
+renderGrid();resize();placePlanes();goView('34',true);applyOption();renderPickers();renderInfo();loop();
+new ResizeObserver(resize).observe(sceneEl);
+</script>
+
+</body></html>
